@@ -10,12 +10,19 @@ window.audioprocess = (function() {
     var rmsBuffer = new Array(100, 0.5);
     var rmsBufferIndex = 0;
 
-    window.setInterval(function() {
-      var cpy = rmsBuffer.slice();
-      cpy.sort()
-      if (exp.transmit)
-        exp.transmit(cpy[cpy.length / 2])
-    }, 100);
+    var intervalTimeout = null;
+    exp.start = function() {
+      intervalTimeout = window.setInterval(function() {
+          var cpy = rmsBuffer.slice();
+          cpy.sort();
+          if (exp.transmit)
+            exp.transmit(cpy[cpy.length / 2]);
+        }, 100);
+    };
+
+    exp.stop = function() {
+      window.clearInterval(intervalTimeout);
+    }
 
     processor.onaudioprocess = function(evt) {
       var inputBuffer = evt.inputBuffer.getChannelData(0);
