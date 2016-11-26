@@ -9,7 +9,13 @@
                  [org.postgresql/postgresql "9.4-1201-jdbc41"]
                  [ring/ring-defaults "0.2.1"]]
   :plugins [[lein-ring "0.9.7"]]
-  :ring {:handler sound-tracker.handler/app}
+  :ring {:handler sound-tracker.handler/app
+         :ssl? true
+         :port 3000
+         :ssl-port 8002
+         :keystore "/home/patience/ssl/keystore.jks"
+         :key-password "password" 
+         }
   :profiles
   {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
                         [ring/ring-mock "0.3.0"]]}})
