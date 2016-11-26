@@ -8,16 +8,16 @@
 
 (defroutes app-routes
   (GET "/" [] (pages/home))
-  (GET "/out" (data/get-logs))
+  (GET "/out" [] (data/get-logs))
   (POST "/in" req
         (let [params (:params req)
               source (get params :source)
-              time (java.sql.Date. (System/currentTimeMillis))
-              level (get params :level)]
+              time (java.sql.Timestamp. (System/currentTimeMillis))
+              level (java.lang.Float/parseFloat (get params :level))]
           (println (str "New in " source " " time " " level))
           (data/log source time level)))
   (route/resources "/")
   (route/not-found "404 Not Found"))
 
 (def app
-  (wrap-defaults app-routes site-defaults))
+  (wrap-defaults app-routes (assoc-in site-defaults [:security :anti-forgery] false)))
