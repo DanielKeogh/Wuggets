@@ -15,9 +15,17 @@ function drawcircle(canvas)
     context.stroke();
 }
 
+function httpGet(theUrl)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
+}
 
 function formposted()
 {
+    httpGet("/out");
     var canvas = document.getElementById('heatcanvas');
     drawcircle(canvas);
     return false;

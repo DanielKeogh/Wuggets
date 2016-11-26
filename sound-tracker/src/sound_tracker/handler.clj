@@ -8,6 +8,7 @@
 
 (defroutes app-routes
   (GET "/" [] (pages/home))
+  (GET "/out" (data/get-logs))
   (POST "/in" req
         (let [params (:params req)
               source (get params :source)
