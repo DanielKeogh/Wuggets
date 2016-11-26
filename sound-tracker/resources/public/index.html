@@ -32,16 +32,23 @@
       document.getElementById("status").innerHTML = "Error";
     }
 
+    var levels = [];
     audioprocess.transmit = function(nb) {
       var element = document.getElementById('volume');
       element.style.width = (100 * nb) + '%';
 
-      var name = 'ZZZ' + document.getElementById('txtName').value;
+      levels.push(nb);
 
-      $.post('/in', {
-        'source': name.substring(name.length - 3, name.length),
-        'level': nb
-      });
+      if (levels.length == 10) {
+        var name = 'ZZZ' + document.getElementById('txtName').value;
+
+        $.post('/in', {
+          'source': name.substring(name.length - 3, name.length),
+          'levels': levels
+        });
+
+        levels = [];
+      }
     }
 
     audioprocess.success = function() {
