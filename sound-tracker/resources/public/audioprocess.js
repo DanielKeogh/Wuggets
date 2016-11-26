@@ -7,8 +7,8 @@ window.audioprocess = (function() {
     var source = context.createMediaStreamSource(stream);
     var processor = context.createScriptProcessor(2048, 1, 1);
 
-    var rmsBuffer = new Array(100, 0.5);
     var rmsBufferIndex = 0;
+    var rmsBuffer = generateArray(100, 0.5);
 
     var intervalTimeout = null;
     exp.start = function() {
