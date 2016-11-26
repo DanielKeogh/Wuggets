@@ -13,3 +13,9 @@
  
 (defn log [source time level]
   (sql/insert-multi! pg-db :sounds [{:source source :time time :level level}]))
+
+(defn get-logs []
+  (sql/query pg-db
+  ["select * from sound"]
+  {})
+  )
