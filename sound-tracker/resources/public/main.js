@@ -26,4 +26,6 @@
   }
 
   navigator.getUserMedia({audio: true}, success, error);
+
+  window.audioproc = {}
 })();
