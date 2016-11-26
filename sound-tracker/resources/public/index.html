@@ -15,7 +15,8 @@
     src="https://code.jquery.com/jquery-3.1.1.min.js"
     integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
     crossorigin="anonymous"></script>
-  <script type="text/javascript" src="audioprocess.js"></script>
+    <script type="text/javascript" src="utilities.js"></script>
+    <script type="text/javascript" src="audioprocess.js"></script>
   <script>
     var btn = document.getElementById("btnToggle");
     btn.onclick = function() {
@@ -32,23 +33,11 @@
       document.getElementById("status").innerHTML = "Error";
     }
 
-    var levels = [];
+    var transmitter = getTransmitter('NAM', 0, 0);
     audioprocess.transmit = function(nb) {
       var element = document.getElementById('volume');
       element.style.width = (100 * nb) + '%';
-
-      levels.push(nb);
-
-      if (levels.length == 10) {
-        var name = 'ZZZ' + document.getElementById('txtName').value;
-
-        $.post('/in', {
-          'source': name.substring(name.length - 3, name.length),
-          'levels': levels
-        });
-
-        levels = [];
-      }
+      transmitter(nb);
     }
 
     audioprocess.success = function() {
