@@ -2,15 +2,39 @@
 
 <html>
 <body>
+  <h1>Audio Recorder</h1>
+  <h2>Status <span id="status">Connecting</span></h2>
+
   <div style="width:500px; height:100px; border: solid thin black;">
     <div id="volume" style="height:100%;background-color:green;" />
   </div>
+  <script
+    src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
+
+  <script type="text/javascript" src="main.js"></script>
   <script>
-    function transmit(nb) {
+    audioprocess.onconnecterror = function(evt) {
+      document.getElementById("status").innerHTML = "Error";
+    }
+
+    audioprocess.transmit = function(nb) {
       var element = document.getElementById('volume');
       element.style.width = (100 * nb) + '%';
+
+      $.post('/in', {
+        'source': 'ASS',
+        'level': nb
+      }, function(){}, function(err) {
+        console.log(err);
+      });
+    }
+
+    audioprocess.success = function() {
+      document.getElementById("status").innerHTML = "Listening";
     }
   </script>
-  <script type="text/javascript" src="main.js"></script>
+
 </body>
 </html>
