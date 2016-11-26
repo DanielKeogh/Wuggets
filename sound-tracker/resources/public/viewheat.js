@@ -1,8 +1,8 @@
-function drawcircle(canvas)
+function drawcircle(canvas, x, y, level)
 {
     var context = canvas.getContext('2d');
-    var centerX = canvas.width / 2;
-    var centerY = canvas.height / 2;
+    var centerX = x;
+    var centerY = y;
     var radius = 70;
     
     context.globalAlpha = 0.5;
@@ -20,17 +20,53 @@ function httpGet(theUrl)
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open("POST", theUrl, false); // false for synchronous request
     xmlHttp.send( null );
-    //consol.log(xmlHttp);
     return xmlHttp.responseText;
+}
+
+function drawrequest(request) {
+    var canvas = document.getElementById('heatcanvas');
+    var rows = request.split("|");
+    var len = rows.length;
+    console.log("request");
+    clearInterval();
+    var i = 0;
+    setInterval(function(){
+       
+       if(i >= len)
+       {
+           clearInterval();
+       }
+       else
+       {
+           console.log("request");
+           var row = rows[i];
+           var rowbody = row.split(",");
+           var x = parseInt(row[0]);
+           var y = parseInt(row[1])
+           var time = row[2];
+           var level = parseFloat(row[3]);
+
+            console.log("wwa");
+           drawcircle(canvas, x, y, level);
+           i++;
+       }
+    }, 200);
+
+    return false;
 }
 
 function formposted()
 {
     var request = httpGet("/out");
-
     console.log(request);
-    var canvas = document.getElementById('heatcanvas');
-    drawcircle(canvas);
+    try
+    {
+        drawrequest(request);
+    }
+    catch(err)
+    {
+       document.getElementById("errors").innerHTML = err.message;
+    }
     return false;
 }
 

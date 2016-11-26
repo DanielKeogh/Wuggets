@@ -10,9 +10,9 @@
   (GET "/" [] (pages/home))
   (POST "/out" req 
         (let [params (:params req)
-              start (java.sql.Timestamp. 0)
-              end  (java.sql.Timestamp. 99999999999)]
-          (str "wh" (data/format-logs (data/get-logs (java.sql.Timestamp. 0) (java.sql.Timestamp. 999999999999))))))
+              start (:start req)
+              end  (:end req)]
+          (data/get-log-str start end)))
 
   (POST "/in" req
         (let [params (:params req)

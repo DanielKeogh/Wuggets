@@ -29,6 +29,7 @@
                    [:ul {:class "nav navbar-nav"}
                     [:li {:class "active"} [:a {:href "#"} "Home"]]]]]]
     [:div.container body]
+    [:div#errors]
     (hpage/include-js "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js")
     (hpage/include-js "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
     (hpage/include-js "viewheat.js")]))
