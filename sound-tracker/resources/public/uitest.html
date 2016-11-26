@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<html>
+<body>
+
+  <canvas id="display" width="500" height="500" style="border:solid thin black">
+    Not Supported
+  </canvas>
+
+  <script type="text/javascript" src="render.js"></script>
+  <script type="text/javascript">
+    var canvas = document.getElementById("display");
+    var display = new renderer.Display(canvas);
+
+    canvas.onclick = function(evt) {
+      var bounds = canvas.getBoundingClientRect();
+      display.addElement(new renderer.Circle(evt.clientX - bounds.left, evt.clientY - bounds.top, Math.max(0.2, Math.random())));
+    }
+
+    display.start();
+  </script>
+</body>
+</html>
