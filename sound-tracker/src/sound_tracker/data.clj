@@ -11,8 +11,12 @@
    (.getTimeInMillis
     (java.util.GregorianCalendar. year month day))))
  
-(defn log [source time level]
-  (sql/insert-multi! pg-db :sounds [{:source source :time time :level level}]))
+(defn log [source time levels]
+  (sql/insert-multi! pg-db :sounds 
+                     (mapv (fn [level n] {:source source 
+                                          :time (java.sql.Timestamp. (+ (* 100 n) (.getTime time))) 
+                                          :level level}) 
+                           levels (range))))
 
 (defn get-logs []
   (sql/query pg-db

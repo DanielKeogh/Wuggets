@@ -13,9 +13,9 @@
         (let [params (:params req)
               source (get params :source)
               time (java.sql.Timestamp. (System/currentTimeMillis))
-              level (java.lang.Float/parseFloat (get params :level))]
+              levels (map java.lang.Float/parseFloat (get params :levels))]
           (println (str "New in " source " " time " " level))
-          (data/log source time level)))
+          (data/log source time levels)))
   (route/resources "/")
   (route/not-found "404 Not Found"))
 
