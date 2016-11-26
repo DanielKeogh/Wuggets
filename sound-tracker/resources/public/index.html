@@ -8,6 +8,11 @@
   <div style="width:500px; height:100px; border: solid thin black;">
     <div id="volume" style="height:100%;background-color:green;" />
   </div>
+  <script
+    src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
+
   <script type="text/javascript" src="main.js"></script>
   <script>
     audioprocess.onconnecterror = function(evt) {
@@ -17,6 +22,13 @@
     audioprocess.transmit = function(nb) {
       var element = document.getElementById('volume');
       element.style.width = (100 * nb) + '%';
+
+      $.post('/in', {
+        'source': 'ASS',
+        'level': nb
+      }, function(){}, function(err) {
+        console.log(err);
+      });
     }
 
     audioprocess.success = function() {
