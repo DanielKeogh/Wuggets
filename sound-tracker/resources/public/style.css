@@ -58,35 +58,7 @@ input[type="text"] {
     padding: 0 0 0 0;
 }
 
-/*
-.depth0 input[type="text"] { color: blue; }
-.depth1 input[type="text"] { color: green; }
-.depth2 input[type="text"] { color: purple; }
-.depth3 input[type="text"] { color: brown; }
-.depth4 input[type="text"] { color: orange; }
-.depth5 input[type="text"] { color: aqua; }
-.depth6 input[type="text"] { color: grey; }
-.depth7 input[type="text"] { color: pink; }
-*/
-
-.depth0 { color: blue; }
-.depth1 { color: green; }
-.depth2 { color: purple; }
-.depth3 { color: brown; }
-.depth4 { color: orange; }
-.depth5 { color: aqua; }
-.depth6 { color: grey; }
-.depth7 { color: pink; }
-
-
-<div id="container">
-    <img class='img' src="http://lorempixel.com/320/480/" alt="" />
-    <canvas id="gameCanvas" width="320" height="480"></canvas>
-</div>
-
-CSS
-
-body{text-align: center;background: #f2f6f8;}
+body{background: #f2f6f8;}
 .img{position:absolute;z-index:1;}
 
 #heatview{
@@ -103,4 +75,13 @@ body{text-align: center;background: #f2f6f8;}
 #heatcanvas{
     position:relative;
     z-index:20;
+}
+
+.swag {
+    font-weight: bold;
+}
+
+.space {
+    margin: 4;
+    padding: 2 2 2 2;
 }

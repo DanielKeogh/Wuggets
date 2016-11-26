@@ -5,9 +5,10 @@
             [hiccup.page :as hpage]
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]]))
 
+(defn add-nav-page [name active url]
+  [:li {:class (if (= name active) "active" "boop")} [:a {:href url} name]])
 
-
-(defn core-page [head body]
+(defn core-page [name head body]
   (hpage/html5
    (into (into [:head] head)
          [[:link {:rel "stylesheet" 
@@ -27,7 +28,10 @@
                    [:a {:class "navbar-brand" :href "#"} "Wuggets"]]
                   [:div {:id "navbar" :class "collapse navbar-collapse"}
                    [:ul {:class "nav navbar-nav"}
-                    [:li {:class "active"} [:a {:href "#"} "Home"]]]]]]
+                    (add-nav-page "Home" name "/")
+                    (add-nav-page "Create" name "/add-space")
+                    (add-nav-page "Find" name "/spaces")
+                    ]]]]
     [:div.container body]
     [:div#errors]
     (hpage/include-js "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js")
@@ -47,7 +51,44 @@
    ])
 
 (defn home []
-  (core-page [[:title "Wuggets Core"]]
-             [:div [:h1 "Page Viewer"]
-              (get-heat-canvas "maps/sample.png")
-              ]))
+  (core-page "Home"
+             [[:title "Wuggets - *The* Ambient Noise Monitoring System"]]
+             [:div 
+              [:h1 "This is Wuggets"]
+              [:p "Welcome to the worlds first ambient noise monitoring system."]
+              [:ul.list-unstyled
+               [:li [:i.swag "See"] " how sound affects your space."]
+               [:li [:i.swag "Create"] " amazing visualisations."]
+               [:li [:i.swag "Discover"] " new solutions to noise related problems."]
+               [:li [:i.swag "Believe"] " in the future of space management."]]
+
+              [:div [:h2 "Live Hackagong Map"]
+               (get-heat-canvas "maps/sample.png")]
+              
+              [:div [:h1 ]]]))
+
+
+(defn add-space []
+  (core-page "Create"
+   [[:title "Wuggets - Create your space"]]
+   [:div.space [:h1 "Create a Space"]
+     [:form {:onsubmit "return false"}
+      [:ul.list                       
+       [:li.list-group-item [:label {:for "nme"} "Name your Space"]
+        [:p [:input {:type "text" :name "nme" :placeholder "e.g. London Airport"}]]]
+       [:li.list-group-item [:label {:for "pic"} "Upload an Image"]
+        [:input {:type "file" :name "pic" :accept "image"}]]
+       [:li.list-group-item                        
+        [:input {:type "submit" :value "Push to Innovate"}]]]]]))
+
+(defn spaces [] 
+  (core-page "Find"
+             [[:title "Wuggets - Find your space"]]
+             [:div]))
+
+
+(defn space [space-name]
+  (core-page space-name
+             [[:title (str "Space - " space-name)]]
+             []
+             ))

@@ -8,6 +8,10 @@
 
 (defroutes app-routes
   (GET "/" [] (pages/home))
+  (GET "/add-space" [] (pages/add-space))
+  (GET "/spaces" [] (pages/spaces))
+  (GET "/spaces/:spacename" [spacename]
+       (pages/space spacename))
   (POST "/out" req 
         (let [params (:params req)
               start (:start req)
