@@ -8,13 +8,18 @@
 
 (defroutes app-routes
   (GET "/" [] (pages/home))
-  (GET "/out" [] (data/get-logs))
+  (POST "/out" req 
+        (let [params (:params req)
+              start (java.sql.Timestamp. 0)
+              end  (java.sql.Timestamp. 99999999999)]
+          (data/format-logs (data/get-logs start end))
+          "hello"))
   (POST "/in" req
         (let [params (:params req)
               source (get params :source)
               time (java.sql.Timestamp. (System/currentTimeMillis))
-              levels (map java.lang.Float/parseFloat (get params :levels))]
-          (println (str "New in " source " " time " " level))
+              levels (mapv (fn [e] (java.lang.Float/parseFloat e)) (get params :levels))]
+          (println (str "New in " source " " time " " levels))
           (data/log source time levels)))
   (route/resources "/")
   (route/not-found "404 Not Found"))

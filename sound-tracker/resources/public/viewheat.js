@@ -18,15 +18,19 @@ function drawcircle(canvas)
 function httpGet(theUrl)
 {
     var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    xmlHttp.open("POST", theUrl, false); // false for synchronous request
     xmlHttp.send( null );
+    //consol.log(xmlHttp);
     return xmlHttp.responseText;
 }
 
 function formposted()
 {
-    httpGet("/out");
+    var request = httpGet("/out");
+
+    console.log(request);
     var canvas = document.getElementById('heatcanvas');
     drawcircle(canvas);
     return false;
 }
+
