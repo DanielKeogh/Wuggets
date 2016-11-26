@@ -36,7 +36,8 @@
 (defn get-heat-canvas [img-source]
   [:div#heatview
    [:img {:class "img" :src img-source :alt "A map."}]
-   [:canvas#heatcanvas {:width 640 :height 480}]])
+   [:canvas#heatcanvas {:width 640 :height 480}]
+   [:button]])
 
 (defn home []
   (core-page [[:title "Wuggets Core"]]

@@ -34,10 +34,14 @@
     (hpage/include-js "main.js")]))
 
 (defn get-heat-canvas [img-source]
-  [:div#heatview
-   [:img {:class "img" :src img-source :alt "A map."}]
-   [:canvas#heatcanvas {:width 640 :height 480}]
-   [:button]])
+  [:div#heatviewcontainer
+   [:div#heatview
+    [:img {:class "img" :src img-source :alt "A map."}]
+    [:canvas#heatcanvas {:width 640 :height 480}]]
+   [:form#view-range
+    [:input {:type "dae"}]
+    ]
+   ])
 
 (defn home []
   (core-page [[:title "Wuggets Core"]]
