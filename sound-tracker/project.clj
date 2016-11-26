@@ -5,6 +5,8 @@
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [compojure "1.5.1"]
                  [hiccup "1.0.5"]
+                 [org.clojure/java.jdbc "0.7.0-alpha1"]
+                 [org.postgresql/postgresql "9.4-1201-jdbc41"]
                  [ring/ring-defaults "0.2.1"]]
   :plugins [[lein-ring "0.9.7"]]
   :ring {:handler sound-tracker.handler/app}
