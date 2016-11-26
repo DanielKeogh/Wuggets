@@ -10,8 +10,9 @@
   (GET "/" [] (pages/home))
   (GET "/add-space" [] (pages/add-space))
   (GET "/spaces" [] (pages/spaces))
+  (GET "/wuggets" [] (pages/space "Wuggets" "map"))
   (GET "/spaces/:spacename" [spacename]
-       (pages/space spacename))
+       (pages/space spacename "map"))
   (POST "/out" req 
         (let [params (:params req)
               start (:start req)

@@ -63,7 +63,7 @@
                [:li [:i.swag "Believe"] " in the future of space management."]]
 
               [:div [:h2 "Live Hackagong Map"]
-               (get-heat-canvas "maps/sample.png")]
+               (get-heat-canvas "maps/map.png")]
               
               [:div [:h1 ]]]))
 
@@ -87,8 +87,8 @@
              [:div]))
 
 
-(defn space [space-name]
+(defn space [space-name filename]
   (core-page space-name
              [[:title (str "Space - " space-name)]]
-             []
-             ))
+             [:div [:h1 space-name]
+              (get-heat-canvas (str "maps/" filename ".png"))]))
