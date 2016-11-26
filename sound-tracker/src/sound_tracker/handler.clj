@@ -12,8 +12,8 @@
         (let [params (:params req)
               start (java.sql.Timestamp. 0)
               end  (java.sql.Timestamp. 99999999999)]
-          (data/format-logs (data/get-logs start end))
-          "hello"))
+          (str "wh" (data/format-logs (data/get-logs (java.sql.Timestamp. 0) (java.sql.Timestamp. 999999999999))))))
+
   (POST "/in" req
         (let [params (:params req)
               source (get params :source)

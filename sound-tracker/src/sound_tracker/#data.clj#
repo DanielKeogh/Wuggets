@@ -20,9 +20,10 @@
 
 (defn format-logs [logs]
   (clojure.string/join 
-   (newline) 
-   (map (fn [e] (clojure.string/join "," [(:source e) (:time e) (:level e)]) )
+   "a" 
+   (map (fn [e] (clojure.string/join "a" [(:ource e) (:time e) (:level e)]) )
         (take 20 logs))))
+
 (defn get-logs [start end]
   (sql/query 
    pg-db
