@@ -3,16 +3,16 @@ function drawcircle(canvas, x, y, level)
     var context = canvas.getContext('2d');
     var centerX = x;
     var centerY = y;
-    var radius = 70;
+    var radius = 500 * level;
     
-    context.globalAlpha = 0.5;
+    context.globalAlpha = 0.3;
     context.beginPath();
     context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
-    context.fillStyle = 'green';
+    context.fillStyle = 'red';
     context.fill();
     context.lineWidth = 5;
-    context.strokeStyle = '#003300';
-    context.stroke();
+//    context.strokeStyle = '#003300';
+//    context.stroke();
 }
 
 function httpGet(theUrl)
@@ -27,9 +27,10 @@ function drawrequest(request) {
     var canvas = document.getElementById('heatcanvas');
     var rows = request.split("|");
     var len = rows.length;
-    console.log("request");
+
     clearInterval();
     var i = 0;
+    var lastTime = "";
     setInterval(function(){
        
        if(i >= len)
@@ -38,19 +39,37 @@ function drawrequest(request) {
        }
        else
        {
-           console.log("request");
-           var row = rows[i];
-           var rowbody = row.split(",");
-           var x = parseInt(row[0]);
-           var y = parseInt(row[1])
-           var time = row[2];
-           var level = parseFloat(row[3]);
+           canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+           while (i < len)
+           {
+               console.log('nooby');
+              var rowBody = rows[i];
+              var row = rowBody.split(",");
+              var x = parseInt(row[0]);
+              var y = parseInt(row[1])
+              var time = row[2];
+              var level = parseFloat(row[3]);
 
-            console.log("wwa");
-           drawcircle(canvas, x, y, level);
-           i++;
+              if(lastTime.length == 0)
+              {
+                  lastTime = time;
+              }
+              
+              if (time === lastTime)
+              {
+                console.log(time);
+                drawcircle(canvas, x, y, level);
+                i++;
+              }
+              else
+              {
+                  console.log('notnooby');
+                  break;
+              }
+           }
+           lastTime = "";
        }
-    }, 200);
+    }, 50);
 
     return false;
 }

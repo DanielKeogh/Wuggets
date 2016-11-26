@@ -25,7 +25,7 @@
   (clojure.string/join 
    "|" 
    (map (fn [e] (clojure.string/join "," [(:x e) (:y e) (:rtime e) (:avglevel e)]) )
-        (take 20 logs))))
+        (take 1000 logs))))
 
 (defn get-logs [start end]
   (sql/query 
