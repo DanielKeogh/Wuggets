@@ -45,17 +45,16 @@
     [:img {:class "img" :src img-source :alt "A map."}]
     [:canvas#heatcanvas {:width 640 :height 480}]]
    [:form#view-range {:onsubmit "return formposted()"}
-    [:input {:type "datetime" :value "2011-01-13"}]
-    [:input {:type "datetime" :value "2011-01-13"}]
-    [:input {:type "submit" :value "View Period"} ]
-    ]
-   ])
+   ; [:input {:type "datetime" :value "2011-01-13"}]
+   ; [:input {:type "datetime" :value "2011-01-13"}]
+    [:p "Press the button below to reveal the secrets of this epic Kingdom Hack software..."]
+    [:input {:type "submit" :value "Experience"} ]]])
 
 (defn home []
   (core-page "Home"
              [[:title "Wuggets - *The* Ambient Noise Monitoring System"]]
-             [:div 
-              [:h1 "This is Wuggets"]
+             [:div.core
+              [:h1 "This is your Sound Space Experience"]
               [:p "Welcome to the worlds first ambient noise monitoring system."]
               [:ul.list-unstyled
                [:li [:i.swag "See"] " how sound affects your space."]
@@ -73,7 +72,7 @@
   (core-page "Create"
    [[:title "Wuggets - Create your space"]]
    [:div.space [:h1 "Create a Space"]
-     [:form {:onsubmit "return false"}
+     [:form {:action "/spaces" :method :get}
       [:ul.list                       
        [:li.list-group-item [:label {:for "nme"} "Name your Space"]
         [:p [:input {:type "text" :name "nme" :placeholder "e.g. London Airport"}]]]
