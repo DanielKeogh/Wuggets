@@ -1,6 +1,6 @@
 window.renderer = (function() {
   var UPDATES_PER_SECOND = 30;
-  var CIRCLE_MAX_SIZE = 25;
+  var CIRCLE_MAX_SIZE = 120;
   var CIRCLE_LIFE = 1 * UPDATES_PER_SECOND;
 
   var Circle = function(x, y, intensity) {
@@ -44,8 +44,7 @@ window.renderer = (function() {
   }
 
   Display.prototype.render = function() {
-    this.ctx.fillStyle = 'white';
-    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
     this.ctx.fillStyle = 'black';
     for (var i = 0; i < this.elements.length; i++) {
