@@ -31,6 +31,7 @@
                     (add-nav-page "Home" name "/")
                     (add-nav-page "Create" name "/add-space")
                     (add-nav-page "Find" name "/spaces")
+                    (add-nav-page "Start listening now!" name "/index.html")
                     ]]]]
     [:div.container body]
     [:div#errors]
@@ -84,11 +85,25 @@
 (defn spaces [] 
   (core-page "Find"
              [[:title "Wuggets - Find your space"]]
-             [:div]))
-
+             [:div [:h1 "Find your space"]
+              [:ul [:li [:a {:href "/wuggets"} "Wuggets"]]]
+              [:h2 [:a {:href "/add-space"} "Add New Space"]]]))
 
 (defn space [space-name filename]
   (core-page space-name
              [[:title (str "Space - " space-name)]]
              [:div [:h1 space-name]
-              (get-heat-canvas (str "maps/" filename ".png"))]))
+              (get-heat-canvas (str "maps/" filename ".png"))
+              [:h3 "Map coordinates"]
+
+              [:form {:action "add-code" :method :post}
+               [:ul.list-group
+                [:li.list-group-item [:label {:for "code"} "Add a location code."]
+                 [:p [:input {:type "text" :name "code" :placeholder "e.g. AAA"}]]]
+                [:li.list-group-item [:label {:for "x"} "Set your X"]
+                 [:p [:input {:type "text" :name "x" :placeholder "e.g. 50"}]]]
+                [:li.list-group-item [:label {:for "y"} "Set your Y"]
+                 [:p [:input {:type "text" :name "y" :placeholder "e.g. 50"}]]]
+                [:li.list-group-item
+                 [:input {:type "submit" :value "Assosciate Code"}]]]]
+              ]))

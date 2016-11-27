@@ -18,6 +18,8 @@
                            levels (range))))
 
 (defn set-source-location [code x y]
+  (sql/delete! pg-db :location
+                ["code = ?" code])
   (sql/insert-multi! pg-db :location
                      [{:x x :y y :code code}]))
 

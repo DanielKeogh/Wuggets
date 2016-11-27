@@ -26,6 +26,14 @@
               levels (mapv (fn [e] (java.lang.Float/parseFloat e)) (get params :levels))]
           (println (str "New in " source " " time " " levels))
           (data/log source time levels)))
+  (POST "/add-code" req
+        (let [params (:params req)
+              code (:code params)
+              x (java.lang.Integer/parseInt (:x params))
+              y (java.lang.Integer/parseInt (:y params))]
+
+          (println (str "Code added" code " " x " " y))
+          (data/set-source-location code x y)))
   (route/resources "/")
   (route/not-found "404 Not Found"))
 
