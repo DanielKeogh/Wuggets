@@ -63,8 +63,8 @@ body{background: #f2f6f8;}
 
 #heatview{
     display:inline-block;
-    width:640px; 
-    height:480px;
+    width:650px; 
+    height:490px;
     margin: 5 auto; 
     background: black; 
     position:relative; 
@@ -84,4 +84,9 @@ body{background: #f2f6f8;}
 .space {
     margin: 4;
     padding: 2 2 2 2;
+}
+
+.core {
+    background: white;
+    padding: 10px;
 }
