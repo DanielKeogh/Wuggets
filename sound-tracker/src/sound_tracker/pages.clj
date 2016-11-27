@@ -37,7 +37,9 @@
     [:div#errors]
     (hpage/include-js "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js")
     (hpage/include-js "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
-    (hpage/include-js "viewheat.js")]))
+    (hpage/include-js "render.js")
+    (hpage/include-js "viewheat.js")
+    ]))
 
 (defn get-heat-canvas [img-source]
   [:div#heatviewcontainer

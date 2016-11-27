@@ -1,6 +1,6 @@
 window.renderer = (function() {
   var UPDATES_PER_SECOND = 30;
-  var CIRCLE_MAX_SIZE = 120;
+  var CIRCLE_MAX_SIZE = 160;
   var CIRCLE_LIFE = 1 * UPDATES_PER_SECOND;
 
   var Circle = function(x, y, intensity, color) {
