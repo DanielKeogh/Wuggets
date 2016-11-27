@@ -3,11 +3,12 @@ window.renderer = (function() {
   var CIRCLE_MAX_SIZE = 120;
   var CIRCLE_LIFE = 1 * UPDATES_PER_SECOND;
 
-  var Circle = function(x, y, intensity) {
+  var Circle = function(x, y, intensity, color) {
     this.x = x;
     this.y = y;
     this.intensity = intensity;
     this.progress = 0;
+    this.color = color;
   }
 
   Circle.prototype.render = function(ctx) {
@@ -19,6 +20,7 @@ window.renderer = (function() {
     ctx.beginPath();
     ctx.arc(this.x, this.y, radius, 0, 2 * Math.PI, false);
     ctx.lineWidth = lineWidth;
+    ctx.strokeStyle = this.color;
     ctx.stroke();
   }
 
